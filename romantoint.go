@@ -10,6 +10,9 @@ func main() {
 	fmt.Println(res)
 }
 
+// MCMXCIV
+// 5-1+100-10+1000-100+1000
+
 // Input: s = "MCMXCIV"
 // Output: 1994
 func romanToInt(s string) int {
@@ -48,4 +51,12 @@ func romanToInt(s string) int {
 
 	return res
 
+}
+
+func romanToInt2(s string) int {
+	if current < prev {
+		total -= current
+	} else {
+		total += current
+	}
 }

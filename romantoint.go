@@ -2,31 +2,50 @@ package main
 
 import "fmt"
 
-// I             1
-// V             5
-// X             10
-// L             50
-// C             100
-// D             500
-// M             1000
-func romanToInt(s string) int {
-	symbols := make(map[string]int)
-	symbols["I"] = 10
-	symbols["V"] = 5
-	symbols["X"] = 10
-	symbols["L"] = 50
-	symbols["C"] = 100
-	symbols["D"] = 500
-	symbols["M"] = 1000
+func main() {
+	//res := romanToInt("MCMXCIV")
 
-	for i, x := range s {
-		fmt.Println(x, i)
-	}
+	res := romanToInt("III")
 
-	return 1
+	fmt.Println(res)
 }
 
-func main() {
-	result := romanToInt("III")
-	fmt.Println(result)
+// Input: s = "MCMXCIV"
+// Output: 1994
+func romanToInt(s string) int {
+	translate := make(map[string]int)
+	translate["I"] = 1
+	translate["V"] = 5
+	translate["X"] = 10
+	translate["L"] = 50
+	translate["C"] = 100
+	translate["D"] = 500
+	translate["M"] = 1000
+
+	translate["CM"] = 900
+	translate["XC"] = 90
+	translate["IV"] = 4
+	var res int
+	var sum string
+
+	for i := 0; i < len(s); i++ {
+
+		current := string(s[i])
+		if i < len(s)-1 {
+			next := string(s[i+1])
+			sum = current + next
+		}
+
+		val, ok := translate[sum]
+		if ok {
+			res += val
+			i++
+		} else {
+			res += translate[current]
+		}
+
+	}
+
+	return res
+
 }

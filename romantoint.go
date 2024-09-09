@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	//res := romanToInt("MCMXCIV")
+	res := romanToInt("MCMXCIV")
 
-	res := romanToInt("III")
+	//res := romanToInt2("III")
 
 	fmt.Println(res)
 }
@@ -54,9 +54,25 @@ func romanToInt(s string) int {
 }
 
 func romanToInt2(s string) int {
-	if current < prev {
-		total -= current
-	} else {
-		total += current
+	translate := make(map[string]int)
+	translate["I"] = 1
+	translate["V"] = 5
+	translate["X"] = 10
+	translate["L"] = 50
+	translate["C"] = 100
+	translate["D"] = 500
+	translate["M"] = 1000
+	total := 0
+	prev := 0
+	for i := len(s) - 1; i >= 0; i-- {
+		current := translate[string(s[i])]
+		if current < prev {
+			total -= current
+		} else {
+			total += current
+		}
+		prev = current
 	}
+	return total
+
 }
